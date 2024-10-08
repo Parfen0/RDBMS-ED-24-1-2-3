@@ -1,0 +1,5 @@
+﻿SELECT TOP (1000) [StudentID]
+      ,[FirstName]
+      ,[LastName]
+      ,[DateOfBirth]
+  FROM [STUDENTS2].[dbo].[PersonalInfo]
