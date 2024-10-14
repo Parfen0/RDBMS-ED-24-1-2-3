@@ -9,6 +9,7 @@ EnrollmentDate DATE
 CREATE TABLE Courses(
 CourseId INT,
 CourseName NVARCHAR(50),
+CourseName NVARCHAR(100),
 CourseDescription TEXT,
 Credits INT
 );
