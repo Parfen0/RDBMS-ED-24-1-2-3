@@ -1,18 +1,19 @@
 CREATE DATABASE University6;
 
 CREATE TABLE Students6 (
-StudentID INT PRIMARY KEY, 
-FirstName NVARCHAR(50), 
-LastName NVARCHAR(50), 
-EnrollmentDate DATE 
+StudentID INT PRIMARY KEY, -- Унікальний ідентифікатор студента
+FirstName NVARCHAR(50),  -- Ім'я студента
+LastName NVARCHAR(50),  -- Прізвище студента
+EnrollmentDate DATE -- Дата зарахування
 );
 
 
 CREATE TABLE Courses(
-CourseId INT,
-CourseName NVARCHAR(50),
-CourseDescription TEXT,
-Credits INT
+CourseId INT,INT PRIMARY KEY, -- Унікальний ідентифікатор курсу
+CourseName NVARCHAR(50),-- Назва курсу (до 50 символів)
+CourseDescription TEXT,-- Опис курсу
+Credits INT-- Кількість кредитів за курс
+);
 );
 
 
