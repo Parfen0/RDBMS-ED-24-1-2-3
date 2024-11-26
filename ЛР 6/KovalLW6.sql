@@ -1,0 +1,55 @@
+﻿
+--Task 2.1--
+SELECT [ORDER_NUM], [ORDER_DATE],[CUST], [REP], [MFR], [PRODUCT], [QTY], [AMOUNT]
+FROM [dbo].[ORDERS]
+WHERE YEAR(ORDER_DATE) NOT BETWEEN 2008 AND 2008
+  AND (PRODUCT LIKE '_A%' OR PRODUCT LIKE '%0%');
+
+   --Task 2.2--
+  SELECT [MFR],
+Count(Distinct [ORDER_NUM]) as Orders,
+SUM(AMOUNT) as TotalOrderAmount
+FROM [dbo].[ORDERS]
+WHERE YEAR(Order_Date) NOT BETWEEN 2008 AND 2008
+  AND (PRODUCT LIKE '_A%' OR PRODUCT LIKE '%0%')
+GROUP BY [MFR]
+ORDER BY TotalOrderAmount  ASC;
+
+--Task 2.3--
+SELECT TOP 1 WITH TIES [MFR], SUM(Amount) AS TotalOrderAmount
+FROM [dbo].[ORDERS]
+WHERE YEAR(Order_Date) NOT BETWEEN 2008 AND 2008
+  AND (PRODUCT LIKE '_A%' OR PRODUCT LIKE '%0%')
+GROUP BY [MFR]
+ORDER BY TotalOrderAmount DESC;
+
+--Task 3--
+SELECT TOP 1 WITH TIES [REP_OFFICE], 
+COUNT(*) AS EmployeeCount
+FROM [dbo].[SALESREPS]
+WHERE TITLE = 'Sales Rep' AND Age IN (29, 45, 48)
+GROUP BY [REP_OFFICE]
+ORDER BY EmployeeCount DESC;
+
+--Task 4--
+SELECT TOP 1 WITH TIES MFR_ID, PRODUCT_ID, [DESCRIPTION], LEN([DESCRIPTION]) AS DescriptionLength
+FROM [dbo].[PRODUCTS]
+ORDER BY LEN([DESCRIPTION]) DESC;
+
+--Task 5--
+SELECT DISTINCT CONCAT_WS(' ', RTRIM(MFR_ID), RTRIM(PRODUCT_ID), RTRIM([DESCRIPTION])) AS ConcatenatedString,
+                LEN(CONCAT_WS(' ', RTRIM(MFR_ID), RTRIM(PRODUCT_ID), RTRIM([DESCRIPTION]))) AS StringLength
+FROM [dbo].[PRODUCTS]
+WHERE PRODUCT_ID NOT LIKE '%[^0-9]%'
+ORDER BY StringLength DESC;
+
+--Task 6--
+SELECT [CUST_NUM], 
+       CONCAT(
+           LEFT([COMPANY], 2), 
+           REPLICATE('*', LEN([COMPANY]) - 4), 
+           RIGHT([COMPANY], 2)
+       ) AS MaskedName,
+       [Credit_Limit]
+FROM [dbo].[CUSTOMERS]
+WHERE [Credit_Limit] = (SELECT MIN(CREDIT_LIMIT) FROM [dbo].[CUSTOMERS]);
