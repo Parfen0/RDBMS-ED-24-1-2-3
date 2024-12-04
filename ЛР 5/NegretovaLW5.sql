@@ -1,0 +1,31 @@
+USE WebStor1
+
+SELECT EmployeeID, FirstName, Age, Title
+FROM [dbo].[SALESREPS]
+WHERE Age > 45
+ORDER BY Age DESC;
+
+
+
+
+CREATE TABLE ORDERS (
+    OrderID INT PRIMARY KEY,
+    OrderDate DATE,
+    REP INT,
+    MFR NVARCHAR(50),
+    PRODUCT NVARCHAR(50),
+    Quantity INT,
+    TotalPrice DECIMAL(10, 2)
+);
+
+
+SELECT DISTINCT MFR, PRODUCT
+FROM [dbo].[ORDERS]
+WHERE YEAR(OrderDate) = 2008;
+
+SELECT TOP 1 WITH TIES REP, COUNT(OrderID) AS OrderCount
+FROM [dbo].[ORDERS]
+WHERE YEAR(OrderDate) = 2008
+GROUP BY REP
+ORDER BY COUNT(OrderID) DESC;
+
