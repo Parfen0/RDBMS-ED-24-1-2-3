@@ -1,0 +1,1 @@
+        ALTER TABLE Courses  ADD Department NVARCHAR(200);
